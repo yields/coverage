@@ -1,0 +1,22 @@
+{
+  "name": "coverage",
+  "repo": "yields/coverage",
+  "description": "code coverage",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": ["index.js", "ui.js"],
+  "styles": ["coverage.css"],
+  "dependencies": {
+    "component/each": "*",
+    "component/query": "*",
+    "component/domify": "*",
+    "yields/instrument": "*",
+    "yields/cover-map": "*"
+  },
+  "development": {
+    "visionmedia/mocha": "*",
+    "yields/lru-cache": "*",
+    "component/assert": "*"
+  }
+}

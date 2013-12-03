@@ -1,0 +1,42 @@
+
+<div class='stats'>
+  <div class='percentage'><%= percent + '%' %></div>
+  <div class='sloc'><%= sloc %></div>
+</div>
+
+<% mods.forEach(function(mod){ %>
+  <div class='file'>
+    <h2 id='<%= mod.key %>'><%= mod.key %></h2>
+
+    <div class='stats'>
+      <div class='percentage'><%= mod.percent + '%' %></div>
+      <div class='sloc'><%= mod.sloc %></div>
+    </div>
+
+    <table class='source'>
+      <tbody>
+        <% mod.lines.forEach(function(obj){ %>
+          <% if (obj.hits) { %>
+            <tr class='hit'>
+              <td class='line'><%= obj.n + 1 %></td>
+              <td class='hits'><%= obj.hits %></td>
+              <td class='source'><%= obj.src %></td>
+            </tr>
+          <% } else if (0 == obj.hits) { %>
+            <tr class='miss'>
+              <td class='line'><%= obj.n + 1 %></td>
+              <td class='hits'>0</td>
+              <td class='source'><%= obj.src %></td>
+            </tr>
+          <% } else { %>
+            <tr>
+              <td class='line'><%= obj.n + 1 %></td>
+              <td class='hits'></td>
+              <td class='source'><%= obj.src %></td>
+            </tr>
+          <% } %>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% }) %>
