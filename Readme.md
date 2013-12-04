@@ -1,7 +1,7 @@
 
 # Coverage
 
-  code coverage in your browser (WIP)
+  code coverage in your browser
 
 ## Installation
 
