@@ -26,6 +26,7 @@ module.exports = Coverage;
 function Coverage(name){
   if (!(this instanceof Coverage)) return new Coverage(name);
   this.cov = instrument(name);
+  this.name = name;
 }
 
 /**
@@ -39,6 +40,10 @@ Coverage.prototype.render = function(){
   if (!el) throw new Error('"#coverage" was not found');
   var obj = map(this.cov);
   var self = this;
+
+  // ui stuff
+  obj.level = level(obj);
+  obj.name = this.name;
 
   // normalize
   obj.mods = obj.mods.map(function(mod){
@@ -70,6 +75,8 @@ Coverage.prototype.normalize = function(mod){
   // mod lines
   mod.lines = [];
 
+  // level
+  mod.level = level(mod);
 
   // normalize ranges
   each(lines, function(line, i){
@@ -78,8 +85,11 @@ Coverage.prototype.normalize = function(mod){
     var end = range[1];
     var len = line.length;
 
+    // ignore @sourceURL
+    if (0 == line.indexOf('//@ sourceURL=')) return;
+
     // total
-    chars += (line + '\n').length;
+    chars += len + 1;
 
     // skip
     if (start > chars - 2) {
@@ -104,17 +114,10 @@ Coverage.prototype.normalize = function(mod){
     var mark = range.join(':');
     var hits = mod.covered[mark] || 0;
 
-    // sloc
-    if (mod.covered.hasOwnProperty(mark)) {
-      if (!line.trim()) hits = null;
-      return mod.lines.push({
-        src: line + '\n',
-        hits: hits,
-        n: i
-      });
-    }
+    // empty
+    if (!line.trim()) hits = null;
 
-    // ignored
+    // sloc
     mod.lines.push({
       src: line + '\n',
       hits: hits,
@@ -124,3 +127,18 @@ Coverage.prototype.normalize = function(mod){
 
   return mod;
 };
+
+/**
+ * Get level of coverage with `obj`.
+ *
+ * @param {Object} obj
+ * @return {String}
+ */
+
+function level(obj){
+  var p = obj.percent / 10;
+  if (7 <= p) return 'high';
+  if (5 <= p) return 'medium';
+  if (3 <= p) return 'low';
+  return 'terrible';
+}
