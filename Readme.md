@@ -18,7 +18,7 @@ clone and run `$ make example`.
 <html>
   <head>
     <meta charset='utf8'>
-    <title>coverage-example</title>
+    <title>yields-lru-cache</title>
     <link rel='stylesheet' href='../build/build.css'>
     <script src='../build/build.js'></script>
     <script>require('mocha')</script>
@@ -27,7 +27,6 @@ clone and run `$ make example`.
   <body>
     <div id='coverage'></div>
     <div id='mocha' style='display: none;'></div>
-    <script src='math.js'></script>
     <script>cov = require('coverage')('yields-lru-cache');</script>
     <script src='test.js'></script>
     <script>mocha.run(cov.render.bind(cov))</script>
