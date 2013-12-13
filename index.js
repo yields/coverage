@@ -50,6 +50,10 @@ Coverage.prototype.render = function(){
     return self.normalize(mod);
   });
 
+  // hide mocha
+  var mocha = query('#mocha');
+  mocha.style.display = 'none';
+
   // render
   el.appendChild(domify(ui(obj)));
 };
