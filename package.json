@@ -1,0 +1,9 @@
+{
+  "name": "coverage",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "stdin": "0.0.1",
+    "ejs": "^1.0.0"
+  }
+}
