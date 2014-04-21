@@ -171,7 +171,7 @@
 #coverage #stats::after {
   display: block;
   content: '';
-  clear: bot;
+  clear: both;
 }
 #coverage #stats div {
   float: left;
