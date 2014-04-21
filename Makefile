@@ -1,7 +1,7 @@
 
 ejs= node scripts/ejs.js
 
-build: node_modules components index.js ui.js
+build: node_modules components index.js ui.js coverage.css
 	@component build --dev
 
 components: component.json
@@ -12,6 +12,9 @@ components: component.json
 
 ui.js: ui.ejs
 	@$(ejs) < $< > $@
+
+coverage.css: coverage.styl
+	stylus <$< >$@
 
 clean:
 	rm -fr build components ui.js
